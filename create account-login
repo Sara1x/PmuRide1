@@ -1,0 +1,70 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class AccountSystem {
+    private static Map<String, String> userDatabase = new HashMap<>();
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("1. Create Account");
+            System.out.println("2. Log In");
+            System.out.println("3. Exit");
+
+            System.out.print("Choose an option: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            switch (choice) {
+                case 1:
+                    createAccount(scanner);
+                    break;
+                case 2:
+                    login(scanner);
+                    break;
+                case 3:
+                    System.out.println("Exiting the program. Goodbye!");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please enter a valid option.");
+            }
+        }
+    }
+
+    private static void createAccount(Scanner scanner) {
+        System.out.print("Enter a username: ");
+        String username = scanner.nextLine();
+
+        // Check if the username already exists
+        if (userDatabase.containsKey(username)) {
+            System.out.println("Username already exists. Please choose a different username.");
+            return;
+        }
+
+        System.out.print("Enter a password: ");
+        String password = scanner.nextLine();
+
+        // Store the username and password in the in-memory database
+        userDatabase.put(username, password);
+
+        System.out.println("Account created successfully. You can now log in.");
+    }
+
+    private static void login(Scanner scanner) {
+        System.out.print("Enter your username: ");
+        String username = scanner.nextLine();
+
+        System.out.print("Enter your password: ");
+        String password = scanner.nextLine();
+
+        // Check if the entered credentials match a user in the database
+        if (userDatabase.containsKey(username) && userDatabase.get(username).equals(password)) {
+            System.out.println("Login successful. Welcome, " + username + "!");
+        } else {
+            System.out.println("Invalid username or password. Please try again.");
+        }
+    }
+}
