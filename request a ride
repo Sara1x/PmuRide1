@@ -1,0 +1,8 @@
+<label for="Frist name">Frist name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="Last name">Last name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">email:</label>
+    <input type="text" id="email" name="email" required>
