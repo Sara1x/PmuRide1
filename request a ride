@@ -1,8 +1,29 @@
-<label for="Frist name">Frist name:</label>
-    <input type="text" id="name" name="name" required>
 
-    <label for="Last name">Last name:</label>
-    <input type="text" id="name" name="name" required>
+        import java.util.Scanner;
 
-    <label for="email">email:</label>
-    <input type="text" id="email" name="email" required>
+public class RideRequestApp {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Welcome to the PMURide App!");
+
+        // Request a ride
+        System.out.print("Do you want to request a ride? (yes/no): ");
+        String requestRideInput = scanner.nextLine();
+
+        if (requestRideInput.equalsIgnoreCase("yes")) {
+            System.out.println("Ride requested.");
+
+            // Ask for the destination
+            System.out.print("Please enter your destination: ");
+            String destination = scanner.nextLine();
+
+            System.out.println("Great! A car will be on its way to take you to " + destination + ".");
+        } else {
+            System.out.println("No ride requested. Have a good day!");
+        }
+
+        // Close the scanner to prevent resource leak
+        scanner.close();
+    }
+}
