@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class AccountSystem {
-    private static Map<String, String> userDatabase = new HashMap<>();
+    private static Map<String, UserInfo> userDatabase = new HashMap<>();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -35,6 +35,15 @@ public class AccountSystem {
     }
 
     private static void createAccount(Scanner scanner) {
+        System.out.print("Enter your First Name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Enter your Last Name: ");
+        String lastName = scanner.nextLine();
+
+        System.out.print("Enter your Email: ");
+        String email = scanner.nextLine();
+
         System.out.print("Enter a username: ");
         String username = scanner.nextLine();
 
@@ -47,8 +56,9 @@ public class AccountSystem {
         System.out.print("Enter a password: ");
         String password = scanner.nextLine();
 
-        // Store the username and password in the in-memory database
-        userDatabase.put(username, password);
+        // Store the user information in the in-memory database
+        UserInfo userInfo = new UserInfo(firstName, lastName, email, username, password);
+        userDatabase.put(username, userInfo);
 
         System.out.println("Account created successfully. You can now log in.");
     }
@@ -61,10 +71,46 @@ public class AccountSystem {
         String password = scanner.nextLine();
 
         // Check if the entered credentials match a user in the database
-        if (userDatabase.containsKey(username) && userDatabase.get(username).equals(password)) {
-            System.out.println("Login successful. Welcome, " + username + "!");
+        if (userDatabase.containsKey(username) && userDatabase.get(username).getPassword().equals(password)) {
+            System.out.println("Login successful. Welcome, " + userDatabase.get(username).getFirstName() + "!");
         } else {
             System.out.println("Invalid username or password. Please try again.");
+        }
+    }
+
+    private static class UserInfo {
+        private String firstName;
+        private String lastName;
+        private String email;
+        private String username;
+        private String password;
+
+        public UserInfo(String firstName, String lastName, String email, String username, String password) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+            this.username = username;
+            this.password = password;
+        }
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getPassword() {
+            return password;
         }
     }
 }
